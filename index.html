@@ -42,7 +42,7 @@
       color: #1DA1F2;
     }
 
-    .project-card {
+    .project-card, .contribution-card {
       background-color: #333;
       padding: 20px;
       margin-bottom: 15px;
@@ -60,6 +60,23 @@
       border-right: 2px solid white;
       white-space: nowrap;
       overflow: hidden;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .language-chart {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .chart-bar {
+      height: 20px;
+      margin: 5px;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -102,9 +119,16 @@
 
     <!-- Projects Section -->
     <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="projects">
-      <h2 class="w3-text-light-grey">Projects</h2>
+      <h2 class="w3-text-light-grey">Top Projects</h2>
       <hr style="width:200px" class="w3-opacity">
       <div id="projects-container"></div>
+    </div>
+
+    <!-- Languages Used Section -->
+    <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="languages">
+      <h2 class="w3-text-light-grey">Languages Used</h2>
+      <hr style="width:200px" class="w3-opacity">
+      <div class="language-chart" id="language-chart"></div>
     </div>
 
     <!-- Contact Section -->
@@ -127,6 +151,9 @@
   </div>
 
   <script>
+    const username = "ShadBalti"; // Replace with your GitHub username
+
+    // Typing effect
     const text = "I'm Dilshad Hussain";
     let index = 0;
     function typeWriter() {
@@ -138,11 +165,11 @@
     }
     typeWriter();
 
-    // GitHub API Call to Fetch Projects
-    async function fetchGitHubProjects() {
-      const username = "ShadBalti"; // Replace with your GitHub username
-      const response = await fetch(`https://api.github.com/users/${username}/repos`);
-      const repos = await response.json();
+    // Fetch GitHub Projects and Languages
+    async function fetchGitHubData() {
+      const repoResponse = await fetch(`https://api.github.com/users/${username}/repos`);
+      const repos = await repoResponse.json();
+      const languages = {};
 
       const projectsContainer = document.getElementById('projects-container');
       repos.forEach(repo => {
@@ -151,14 +178,44 @@
         projectCard.innerHTML = `
           <h3>${repo.name}</h3>
           <p>${repo.description || "No description available."}</p>
+          <div class="stats">
+            <span>⭐ ${repo.stargazers_count}</span>
+            <span>🍴 ${repo.forks_count}</span>
+            <span>👀 ${repo.watchers_count}</span>
+          </div>
           <a href="${repo.html_url}" target="_blank">View on GitHub</a>
         `;
         projectsContainer.appendChild(projectCard);
+
+        // Track languages
+        if (repo.language) {
+          languages[repo.language] = (languages[repo.language] || 0) + 1;
+        }
+      });
+
+      renderLanguageChart(languages);
+    }
+
+    // Render Language Usage Chart
+    function renderLanguageChart(languages) {
+      const chartContainer = document.getElementById('language-chart');
+      Object.keys(languages).forEach(language => {
+        const bar = document.createElement('div');
+        bar.classList.add('chart-bar');
+        bar.style.width = `${languages[language] * 20}px`;
+        bar.style.backgroundColor = getRandomColor();
+        bar.textContent = language;
+        chartContainer.appendChild(bar);
       });
     }
 
-    fetchGitHubProjects();
+    // Generate Random Color for Chart Bars
+    function getRandomColor() {
+      return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    }
+
+    fetchGitHubData();
   </script>
 
 </body>
-      </html>
+        </html>
