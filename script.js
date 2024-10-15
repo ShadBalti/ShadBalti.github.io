@@ -104,20 +104,21 @@ document.addEventListener('DOMContentLoaded', initializePortfolio);
 
 
 const githubUsername = "ShadBalti";
-
 // Fetch GitHub profile picture
 async function fetchProfilePic() {
+  const profilePic = document.getElementById("profile-pic");
+
   try {
     const response = await fetch(`https://api.github.com/users/${githubUsername}`);
     if (!response.ok) {
-      throw new Error("Failed to fetch profile picture");
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
     }
     const data = await response.json();
-    document.getElementById("profile-pic").src = data.avatar_url;
+    profilePic.src = data.avatar_url;
   } catch (error) {
     console.error("Error fetching profile picture:", error);
-    // Fallback image in case of error
-    document.getElementById("profile-pic").src = "https://via.placeholder.com/200";
+    // Set a fallback image if the fetch fails
+    profilePic.src = "https://via.placeholder.com/200"; // Fallback image
   }
 }
 
