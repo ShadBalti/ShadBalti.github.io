@@ -181,3 +181,14 @@ button:hover {
     border-color: transparent;
   }
   }
+#profile-pic-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#profile-pic {
+  border-radius: 50%; /* Make it circular */
+  border: 5px solid #fff; /* Optional border for styling */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow */
+}
