@@ -9,22 +9,38 @@ const typewriterPhrases = [
   "Passionate about JavaScript."
 ];
 let currentPhraseIndex = 0;
-let letterIndex = 0;
+let wordIndex = 0;
 let isDeleting = false;
+
+// Generate Random Color
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+// Apply Colors to Each Word
+function getColorfulText(phrase) {
+  const words = phrase.split(' ');
+  return words.map(word => `<span style="color: ${getRandomColor()}">${word}</span>`).join(' ');
+}
 
 // Typewriter Effect Logic
 function typeWriter() {
   const currentPhrase = typewriterPhrases[currentPhraseIndex];
-  const displayText = currentPhrase.slice(0, letterIndex);
+  const partialPhrase = currentPhrase.split(' ').slice(0, wordIndex + 1).join(' ');
 
-  typewriterText.textContent = displayText;
+  typewriterText.innerHTML = getColorfulText(partialPhrase);
 
-  if (!isDeleting && letterIndex < currentPhrase.length) {
-    letterIndex++;
-    setTimeout(typeWriter, 100); // Typing speed
-  } else if (isDeleting && letterIndex > 0) {
-    letterIndex--;
-    setTimeout(typeWriter, 50); // Deleting speed
+  if (!isDeleting && wordIndex < currentPhrase.split(' ').length) {
+    wordIndex++;
+    setTimeout(typeWriter, 300); // Typing speed
+  } else if (isDeleting && wordIndex > 0) {
+    wordIndex--;
+    setTimeout(typeWriter, 150); // Deleting speed
   } else {
     isDeleting = !isDeleting;
 
