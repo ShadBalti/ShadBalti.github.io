@@ -102,25 +102,3 @@ function loadContributionGraph() {
 // Run Initialization on Page Load
 document.addEventListener('DOMContentLoaded', initializePortfolio);
 
-
-const githubUsername = "ShadBalti";
-// Fetch GitHub profile picture
-async function fetchProfilePic() {
-  const profilePic = document.getElementById("profile-pic");
-
-  try {
-    const response = await fetch(`https://api.github.com/users/${githubUsername}`);
-    if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
-    }
-    const data = await response.json();
-    profilePic.src = data.avatar_url;
-  } catch (error) {
-    console.error("Error fetching profile picture:", error);
-    // Set a fallback image if the fetch fails
-    profilePic.src = "https://via.placeholder.com/200"; // Fallback image
-  }
-}
-
-// Call the function when the page loads
-window.onload = fetchProfilePic;
