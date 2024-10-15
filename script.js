@@ -1,76 +1,80 @@
-// GitHub API Configuration
-const GITHUB_USERNAME = 'ShadBalti';
-const REPOS_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos`;
-const CONTRIBUTIONS_URL = `https://github.com/${GITHUB_USERNAME}`;
-
 // DOM Elements
-const projectsContainer = document.getElementById('projects-container');
-const githubStatsSection = document.querySelector('.github-stats');
-const contributionGraph = document.querySelector('.contribution-graph');
+const typewriterText = document.getElementById('typewriter-text');
+const repoList = document.getElementById('repo-list');
+
+// Typewriter Effect
+const typewriterPhrases = [
+  "I'm Dilshad Hussain.",
+  "Web Developer and Designer.",
+  "Open-Source Enthusiast.",
+  "Passionate about JavaScript."
+];
+let currentPhraseIndex = 0;
+let letterIndex = 0;
+let isDeleting = false;
+
+function typeWriter() {
+  const currentPhrase = typewriterPhrases[currentPhraseIndex];
+  const currentText = isDeleting
+    ? currentPhrase.substring(0, letterIndex--)
+    : currentPhrase.substring(0, letterIndex++);
+
+  typewriterText.textContent = currentText;
+
+  if (!isDeleting && letterIndex === currentPhrase.length) {
+    setTimeout(() => (isDeleting = true), 1000); // Pause before deleting
+  } else if (isDeleting && letterIndex === 0) {
+    isDeleting = false;
+    currentPhraseIndex = (currentPhraseIndex + 1) % typewriterPhrases.length;
+  }
+
+  setTimeout(typeWriter, isDeleting ? 50 : 100); // Adjust speed
+}
 
 // Fetch GitHub Repositories
 async function fetchGitHubRepos() {
   try {
-    const response = await fetch(REPOS_URL);
+    const response = await fetch('https://api.github.com/users/ShadBalti/repos');
+    if (!response.ok) throw new Error('Failed to fetch repositories.');
+
     const repos = await response.json();
-    displayProjects(repos);
+    displayRepos(repos);
   } catch (error) {
-    console.error('Error fetching GitHub repos:', error);
-    projectsContainer.innerHTML = '<p>Failed to load projects. Please try again later.</p>';
+    console.error('Error fetching GitHub repositories:', error);
   }
 }
 
-// Display Repositories as Cards
-function displayProjects(repos) {
-  const projectCards = repos.map(repo => {
-    const languagesUsed = document.createElement('div');
-    fetchRepoLanguages(repo.languages_url, languagesUsed);
-
-    return `
-      <div class="project-card">
-        <h3>${repo.name}</h3>
-        <p>${repo.description || 'No description available.'}</p>
-        <p><strong>Stars:</strong> ${repo.stargazers_count} | <strong>Forks:</strong> ${repo.forks_count}</p>
-        <a href="${repo.html_url}" target="_blank">View on GitHub</a>
-        <div class="languages-used">${languagesUsed.outerHTML}</div>
-      </div>
+// Display Repositories
+function displayRepos(repos) {
+  repoList.innerHTML = ''; // Clear previous content
+  repos.forEach(repo => {
+    const repoItem = document.createElement('li');
+    repoItem.className = 'repo-item';
+    repoItem.innerHTML = `
+      <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+      <p>${repo.description || 'No description provided.'}</p>
+      <span class="language ${repo.language ? repo.language.toLowerCase() : 'unknown'}">
+        ${repo.language || 'Unknown'}
+      </span>
     `;
-  }).join('');
-  projectsContainer.innerHTML = projectCards;
+    repoList.appendChild(repoItem);
+  });
 }
 
-// Fetch Repository Languages
-async function fetchRepoLanguages(url, container) {
-  try {
-    const response = await fetch(url);
-    const languages = await response.json();
-    container.innerHTML = Object.keys(languages)
-      .map(language => `<span class="language-badge ${language}">${language}</span>`)
-      .join('');
-  } catch (error) {
-    console.error('Error fetching repo languages:', error);
-    container.innerHTML = '<p>Failed to load languages.</p>';
-  }
-}
-
-// Embed GitHub Contribution Graph
+// Load GitHub Contributions Graph
 function loadContributionGraph() {
-  const graphHTML = `
-    <img 
-      src="https://ghchart.rshah.org/${GITHUB_USERNAME}" 
-      alt="${GITHUB_USERNAME}'s Contribution Graph" 
-      style="width: 100%; max-width: 800px; margin-top: 16px;"
-    />
-    <a href="${CONTRIBUTIONS_URL}" target="_blank">View detailed contributions on GitHub</a>
+  const graphContainer = document.getElementById('contribution-graph');
+  graphContainer.innerHTML = `
+    <img src="https://ghchart.rshah.org/ShadBalti" alt="GitHub Contribution Graph">
   `;
-  contributionGraph.innerHTML = graphHTML;
 }
 
-// Initialize the Page
+// Initialize Portfolio on Page Load
 function initializePortfolio() {
-  fetchGitHubRepos();
-  loadContributionGraph();
+  typeWriter(); // Start typewriter effect
+  fetchGitHubRepos(); // Fetch and display GitHub repos
+  loadContributionGraph(); // Load contribution graph
 }
 
-// Run Initialization on Page Load
+// Run Initialization
 document.addEventListener('DOMContentLoaded', initializePortfolio);
