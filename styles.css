@@ -12,21 +12,84 @@ body {
   line-height: 1.6;
 }
 
-/* Sidebar Styles */
-.w3-sidebar {
-  width: 120px;
-  background-color: #111;
-  position: fixed;
-  height: 100%;
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.w3-sidebar a {
+.navbar-logo a {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
   text-decoration: none;
 }
 
-.w3-sidebar a:hover {
-  background-color: #575757;
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
+
+.navbar-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #1abc9c;
+}
+
+/* Social media icons */
+.navbar-social a {
+  color: white;
+  font-size: 20px;
+  margin-left: 15px;
+  transition: color 0.3s;
+}
+
+.navbar-social a:hover {
+  color: #1abc9c;
+}
+
+/* Navbar toggle for small screens */
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #333;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+}
+
 
 /* Main Content */
 #main {
