@@ -173,17 +173,8 @@ button:hover {
   border-right: 2px solid white;
   white-space: nowrap;
   overflow: hidden;
-  width: 0;
-  animation: typing 3.5s steps(30, end) infinite, blink-cursor 0.5s step-end infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+  font-weight: bold;
+  animation: blink-cursor 0.7s step-end infinite;
 }
 
 @keyframes blink-cursor {
@@ -191,4 +182,3 @@ button:hover {
     border-color: transparent;
   }
 }
-
