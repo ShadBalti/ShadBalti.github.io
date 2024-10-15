@@ -1,189 +1,185 @@
 <!DOCTYPE html>
-<html>
-<title>Dilshad Hussain ShadBalti</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Dilshad Hussain's web development portfolio and open-source projects.">
-<meta name="keywords" content="web developer, portfolio, HTML, CSS, JavaScript, open-source">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  body,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Montserrat", sans-serif
-  }
+<html lang="en">
 
-  .w3-row-padding img {
-    margin-bottom: 12px
-  }
+<head>
+  <title>Dilshad Hussain | ShadBalti</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dilshad Hussain's web development portfolio and open-source projects.">
+  <meta name="keywords" content="web developer, portfolio, HTML, CSS, JavaScript, open-source, Next.js, React.js">
+  <meta name="author" content="Dilshad Hussain">
+  <meta property="og:title" content="Dilshad Hussain | Web Developer">
+  <meta property="og:description" content="Explore my portfolio, skills, and projects.">
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/6/65/Shadbalti.jpg">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  /* Set the width of the sidebar to 120px */
-  .w3-sidebar {
-    width: 120px;
-    background: #222;
-  }
-
-  /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-  #main {
-    margin-left: 120px
-  }
-
-  /* Remove margins from "page content" on small screens */
-  @media only screen and (max-width: 600px) {
-    #main {
-      margin-left: 0
+  <style>
+    body, h1, h2, h3, h4, h5, h6 {
+      font-family: "Montserrat", sans-serif;
     }
-  }
-</style>
+
+    .w3-sidebar {
+      width: 120px;
+      background: #222;
+    }
+
+    #main {
+      margin-left: 120px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      #main {
+        margin-left: 0;
+      }
+    }
+
+    .social-icons i {
+      margin-right: 10px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .social-icons i:hover {
+      color: #1DA1F2; /* Example hover color */
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .progress-bar {
+      height: 28px;
+      background-color: #1c1c1c;
+    }
+
+    .progress-fill {
+      height: 28px;
+      background-color: #333;
+    }
+
+    .typing-effect {
+      display: inline-block;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  </style>
+</head>
 
 <body class="w3-black">
 
-  <!-- Icon Bar (Sidebar - hidden on small screens) -->
+  <!-- Sidebar -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-    <!-- Avatar image in top left corner -->
-    <img src="/w3images/avatar_smoke.jpg" style="width:100%">
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
-      <i class="fa fa-home w3-xxlarge"></i>
-      <p>HOME</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Shadbalti.jpg" style="width:100%; border-radius: 50%;">
+    <a href="#home" class="w3-bar-item w3-button w3-padding-large w3-black">
+      <i class="fa fa-home w3-xxlarge"></i><p>HOME</p>
     </a>
     <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-user w3-xxlarge"></i>
-      <p>ABOUT</p>
+      <i class="fa fa-user w3-xxlarge"></i><p>ABOUT</p>
     </a>
     <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-eye w3-xxlarge"></i>
-      <p>PHOTOS</p>
+      <i class="fa fa-eye w3-xxlarge"></i><p>PHOTOS</p>
     </a>
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-envelope w3-xxlarge"></i>
-      <p>CONTACT</p>
+      <i class="fa fa-envelope w3-xxlarge"></i><p>CONTACT</p>
     </a>
   </nav>
 
-  <!-- Navbar on small screens (Hidden on medium and large screens) -->
+  <!-- Mobile Navbar -->
   <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
     <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
-      <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
-      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+      <a href="#home" class="w3-bar-item w3-button" style="width:25%;">HOME</a>
+      <a href="#about" class="w3-bar-item w3-button" style="width:25%;">ABOUT</a>
+      <a href="#photos" class="w3-bar-item w3-button" style="width:25%;">PHOTOS</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25%;">CONTACT</a>
     </div>
   </div>
 
-  <!-- Page Content -->
+  <!-- Main Content -->
   <div class="w3-padding-large" id="main">
-    <!-- Header/Home -->
-    <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-      <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> Dilshad Hussain</h1>
-      <p>Web developer and Web Designer.</p>
-      <a href="https://commons.wikimedia.org/wiki/File:Shadbalti.jpg#/media/File:Shadbalti.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Shadbalti.jpg" alt="File:Shadbalti.jpg" class="w3-image" width="992" height="1108"></a>
 
+    <!-- Header -->
+    <header class="w3-container w3-padding-32 w3-center" id="home">
+      <h1 class="w3-jumbo typing-effect" id="typed-text"></h1>
+      <p>Web Developer & Designer | Open Source Contributor</p>
     </header>
 
     <!-- About Section -->
     <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-      <h2 class="w3-text-light-grey">Dilshad</h2>
+      <h2 class="w3-text-light-grey">About Me</h2>
       <hr style="width:200px" class="w3-opacity">
-      <p>I’m Dilshad Hussain, a self-taught web developer from Barah Valley, Khaplu, in Gilgit-Baltistan, Pakistan. At 19 years old, I’ve cultivated a strong passion for technology, specializing in JavaScript and frameworks like Next.js. My journey into web development has been driven by a desire to create impactful solutions and contribute to open-source projects.
-      </p>
-      <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
-      <p class="w3-wide">HTML and CSS</p>
-      <div class="w3-white">
-        <div class="w3-dark-grey" style="height:28px;width:97%"></div>
+      <p>I’m Dilshad Hussain, a 19-year-old self-taught web developer from Barah Valley, Khaplu, Gilgit-Baltistan. 
+        I specialize in JavaScript and frameworks like Next.js, with a passion for technology and open-source contributions.</p>
+
+      <h3 class="w3-padding-16 w3-text-light-grey">Skills</h3>
+      <p class="w3-wide">HTML & CSS</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:97%;"></div>
       </div>
       <p class="w3-wide">Web Design</p>
-      <div class="w3-white">
-        <div class="w3-dark-grey" style="height:28px;width:85%"></div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:85%;"></div>
       </div>
       <p class="w3-wide">JavaScript</p>
-      <div class="w3-white">
-        <div class="w3-dark-grey" style="height:28px;width:80%"></div>
-      </div><br>
-
-      <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
-        <div class="w3-quarter w3-section">
-          <span class="w3-xlarge">11+</span><br>
-          Partners
-        </div>
-        <div class="w3-quarter w3-section">
-          <span class="w3-xlarge">55+</span><br>
-          Projects Done
-        </div>
-        <div class="w3-quarter w3-section">
-          <span class="w3-xlarge">89+</span><br>
-          Happy Clients
-        </div>
-        <div class="w3-quarter w3-section">
-          <span class="w3-xlarge">150+</span><br>
-          Meetings
-        </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:80%;"></div>
       </div>
-
-      <button class="w3-button w3-light-grey w3-padding-large w3-section">
-        <i class="fa fa-download"></i> Download Resume
-      </button>
     </div>
 
-    <!-- Testimonials -->
-    <h3 class="w3-padding-24 w3-text-light-grey">My Reputation</h3>
-    <img src="/w3images/bandmember.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p><span class="w3-large w3-margin-right">Chris Fox.</span> CEO at Mighty Schools.</p>
-    <p>Dilshad saved us from a web disaster.</p><br>
+    <!-- Testimonials Section -->
+    <h3 class="w3-padding-24 w3-text-light-grey">Testimonials</h3>
+    <div class="w3-row">
+      <div class="w3-col s12 m6">
+        <p><strong>Chris Fox</strong> - CEO at Mighty Schools</p>
+        <p>"Dilshad saved us from a web disaster!"</p>
+      </div>
+      <div class="w3-col s12 m6">
+        <p><strong>Rebecca Flex</strong> - CEO at Company</p>
+        <p>"No one is better than Dilshad!"</p>
+      </div>
+    </div>
 
-    <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p><span class="w3-large w3-margin-right">Rebecca Flex.</span> CEO at Company.</p>
-    <p>No one is better than Dilshad.</p>
-    <!-- End About Section -->
-  
-  </div>
-
-  <!-- Contact Section -->
-  <div class="w3-padding-24 w3-content w3-text-grey" id="contact">
-    <h2 class="w3-text-light-grey">Contact Me</h2>
-    <hr style="width:200px" class="w3-opacity">
-
-    <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Baltistan, Pakistan</p>
-      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +923408452974</p>
-      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: shadbalti2@gmail.com</p>
-    </div><br>
-    <p>Let's get in touch. Send me a message:</p>
-
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
-      <p>
+    <!-- Contact Section -->
+    <div class="w3-padding-24 w3-content w3-text-grey" id="contact">
+      <h2 class="w3-text-light-grey">Contact Me</h2>
+      <hr style="width:200px" class="w3-opacity">
+      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge"></i> Baltistan, Pakistan</p>
+      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge"></i> +92 340 8452974</p>
+      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge"></i> shadbalti2@gmail.com</p>
+      <form action="#" method="POST" onsubmit="return validateForm()">
+        <input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name">
+        <input class="w3-input w3-padding-16" type="email" placeholder="Email" required name="email">
+        <textarea class="w3-input w3-padding-16" placeholder="Message" required name="message"></textarea>
         <button class="w3-button w3-light-grey w3-padding-large" type="submit">
-          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+          <i class="fa fa-paper-plane"></i> Send Message
         </button>
-      </p>
-    </form>
-    <!-- End Contact Section -->
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-content w3-padding-64 social-icons">
+      <i class="fa fa-facebook-official"></i>
+      <i class="fa fa-instagram"></i>
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-linkedin"></i>
+    </footer>
+
   </div>
 
-  <!-- Footer -->
-  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-    <!-- End footer -->
-  </footer>
-
-  <!-- END PAGE CONTENT -->
-  
+  <script>
+    const text = "I'm Dilshad Hussain";
+    let index = 0;
+    function typeWriter() {
+      if (index < text.length) {
+        document.getElementById("typed-text").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    typeWriter();
+  </script>
 
 </body>
-
-</html>
+                                     </html>
