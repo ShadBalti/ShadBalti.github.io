@@ -1,8 +1,7 @@
 // DOM Elements
 const typewriterText = document.getElementById('typewriter-text');
-const repoList = document.getElementById('repo-list');
 
-// Typewriter Effect
+// Typewriter Effect Variables
 const typewriterPhrases = [
   "I'm Dilshad Hussain.",
   "Web Developer and Designer.",
@@ -13,22 +12,35 @@ let currentPhraseIndex = 0;
 let letterIndex = 0;
 let isDeleting = false;
 
+// Typewriter Effect Logic
 function typeWriter() {
   const currentPhrase = typewriterPhrases[currentPhraseIndex];
-  const currentText = isDeleting
-    ? currentPhrase.substring(0, letterIndex--)
-    : currentPhrase.substring(0, letterIndex++);
+  const displayText = currentPhrase.slice(0, letterIndex);
 
-  typewriterText.textContent = currentText;
+  typewriterText.textContent = displayText;
 
-  if (!isDeleting && letterIndex === currentPhrase.length) {
-    setTimeout(() => (isDeleting = true), 1000); // Pause before deleting
-  } else if (isDeleting && letterIndex === 0) {
-    isDeleting = false;
-    currentPhraseIndex = (currentPhraseIndex + 1) % typewriterPhrases.length;
+  if (!isDeleting && letterIndex < currentPhrase.length) {
+    letterIndex++;
+    setTimeout(typeWriter, 100); // Typing speed
+  } else if (isDeleting && letterIndex > 0) {
+    letterIndex--;
+    setTimeout(typeWriter, 50); // Deleting speed
+  } else {
+    isDeleting = !isDeleting;
+
+    if (!isDeleting) {
+      currentPhraseIndex = (currentPhraseIndex + 1) % typewriterPhrases.length;
+    }
+
+    setTimeout(typeWriter, 1000); // Pause between phrases
   }
+}
 
-  setTimeout(typeWriter, isDeleting ? 50 : 100); // Adjust speed
+// Initialize Portfolio Features
+function initializePortfolio() {
+  typeWriter(); // Start typewriter effect
+  fetchGitHubRepos(); // Fetch GitHub repos
+  loadContributionGraph(); // Load GitHub contribution graph
 }
 
 // Fetch GitHub Repositories
@@ -46,7 +58,9 @@ async function fetchGitHubRepos() {
 
 // Display Repositories
 function displayRepos(repos) {
+  const repoList = document.getElementById('repo-list');
   repoList.innerHTML = ''; // Clear previous content
+
   repos.forEach(repo => {
     const repoItem = document.createElement('li');
     repoItem.className = 'repo-item';
@@ -69,12 +83,5 @@ function loadContributionGraph() {
   `;
 }
 
-// Initialize Portfolio on Page Load
-function initializePortfolio() {
-  typeWriter(); // Start typewriter effect
-  fetchGitHubRepos(); // Fetch and display GitHub repos
-  loadContributionGraph(); // Load contribution graph
-}
-
-// Run Initialization
+// Run Initialization on Page Load
 document.addEventListener('DOMContentLoaded', initializePortfolio);
