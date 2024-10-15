@@ -1,0 +1,169 @@
+/* General Styles */
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* Sidebar Styles */
+.w3-sidebar {
+  width: 120px;
+  background-color: #111;
+  position: fixed;
+  height: 100%;
+}
+
+.w3-sidebar a {
+  text-decoration: none;
+}
+
+.w3-sidebar a:hover {
+  background-color: #575757;
+}
+
+/* Main Content */
+#main {
+  margin-left: 120px;
+  padding: 16px;
+}
+
+/* Responsive for small screens */
+@media (max-width: 600px) {
+  #main {
+    margin-left: 0;
+  }
+}
+
+/* Header Section */
+header {
+  padding: 64px 0;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+header img {
+  border-radius: 50%;
+  margin-top: 20px;
+}
+
+/* GitHub Section */
+.github-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.contribution-graph {
+  margin-top: 32px;
+  text-align: center;
+}
+
+/* Projects Section */
+#projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.project-card {
+  background-color: #1c1c1c;
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.project-card h3 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.project-card p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.language-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 4px 4px 0 0;
+  font-size: 14px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.language-badge.JavaScript { background-color: #f0db4f; color: #000; }
+.language-badge.HTML { background-color: #e34c26; }
+.language-badge.CSS { background-color: #2965f1; }
+.language-badge.Python { background-color: #3572A5; }
+.language-badge.Java { background-color: #b07219; }
+
+/* Contact Section */
+textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+form input, form textarea {
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 12px;
+  background-color: #1c1c1c;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+form input:focus, form textarea:focus {
+  border-color: #575757;
+  outline: none;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 32px;
+  padding: 16px;
+  border-top: 1px solid #444;
+}
+
+footer i {
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+footer i:hover {
+  color: #aaa;
+}
+
+/* Button Styles */
+button {
+  background-color: #575757;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #444;
+}
