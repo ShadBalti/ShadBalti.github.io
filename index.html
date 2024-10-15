@@ -2,16 +2,14 @@
 <html lang="en">
 
 <head>
-  <title>Dilshad Hussain | ShadBalti</title>
+  <title>Dilshad Hussain - Portfolio</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Dilshad Hussain's web development portfolio and open-source projects.">
-  <meta name="keywords" content="web developer, portfolio, HTML, CSS, JavaScript, open-source, Next.js, React.js">
-  <meta name="author" content="Dilshad Hussain">
+  <meta name="keywords" content="web developer, portfolio, HTML, CSS, JavaScript, open-source">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
   <style>
     body, h1, h2, h3, h4, h5, h6 {
       font-family: "Montserrat", sans-serif;
@@ -32,51 +30,60 @@
       }
     }
 
-    .social-icons i {
-      margin-right: 10px;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .social-icons i:hover {
-      color: #1DA1F2;
-    }
-
-    .project-card, .contribution-card {
-      background-color: #333;
-      padding: 20px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      color: #fff;
-    }
-
-    .project-card a {
-      text-decoration: none;
-      color: #1E90FF;
-    }
-
-    .typing-effect {
-      display: inline-block;
-      border-right: 2px solid white;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-    .stats {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-    }
-
+    /* Custom Styles for Language Usage */
     .language-chart {
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .chart-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
     .chart-bar {
-      height: 20px;
-      margin: 5px;
-      border-radius: 5px;
+      height: 30px;
+      border-radius: 15px;
+      transition: width 0.5s ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-bar-label {
+      font-weight: bold;
+      font-size: 16px;
+      min-width: 100px;
+      color: white;
+    }
+
+    .chart-bar::after {
+      content: attr(data-percent);
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* GitHub Projects Section */
+    .project-card {
+      background-color: #333;
+      margin: 10px 0;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+    }
+
+    .project-card a {
+      color: #1E90FF;
+      text-decoration: none;
+    }
+
+    .project-card a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -85,41 +92,47 @@
 
   <!-- Sidebar -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Shadbalti.jpg" style="width:100%; border-radius: 50%;">
-    <a href="#home" class="w3-bar-item w3-button w3-padding-large w3-black">
-      <i class="fa fa-home w3-xxlarge"></i><p>HOME</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Shadbalti.jpg" style="width:100%">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+      <i class="fa fa-home w3-xxlarge"></i>
+      <p>HOME</p>
     </a>
     <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-user w3-xxlarge"></i><p>ABOUT</p>
+      <i class="fa fa-user w3-xxlarge"></i>
+      <p>ABOUT</p>
     </a>
     <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-code w3-xxlarge"></i><p>PROJECTS</p>
+      <i class="fa fa-code w3-xxlarge"></i>
+      <p>PROJECTS</p>
+    </a>
+    <a href="#languages" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fa fa-language w3-xxlarge"></i>
+      <p>LANGUAGES</p>
     </a>
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-envelope w3-xxlarge"></i><p>CONTACT</p>
+      <i class="fa fa-envelope w3-xxlarge"></i>
+      <p>CONTACT</p>
     </a>
   </nav>
 
-  <!-- Main Content -->
+  <!-- Page Content -->
   <div class="w3-padding-large" id="main">
-
-    <!-- Header -->
     <header class="w3-container w3-padding-32 w3-center" id="home">
-      <h1 class="w3-jumbo typing-effect" id="typed-text"></h1>
-      <p>Web Developer & Designer | Open Source Contributor</p>
+      <h1 class="w3-jumbo">I'm Dilshad Hussain</h1>
+      <p>Web Developer and Open-Source Enthusiast</p>
     </header>
 
     <!-- About Section -->
     <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
       <h2 class="w3-text-light-grey">About Me</h2>
       <hr style="width:200px" class="w3-opacity">
-      <p>I’m Dilshad Hussain, a 19-year-old self-taught web developer from Barah Valley, Khaplu, Gilgit-Baltistan. 
-        I specialize in JavaScript and frameworks like Next.js, with a passion for technology and open-source contributions.</p>
+      <p>I’m Dilshad Hussain, a 19-year-old self-taught web developer from Barah Valley, Gilgit-Baltistan. 
+        Passionate about technology, I work with JavaScript and frameworks like Next.js, contributing to open-source projects.</p>
     </div>
 
-    <!-- Projects Section -->
-    <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="projects">
-      <h2 class="w3-text-light-grey">Top Projects</h2>
+    <!-- GitHub Projects Section -->
+    <div class="w3-content w3-padding-64" id="projects">
+      <h2 class="w3-text-light-grey">GitHub Projects</h2>
       <hr style="width:200px" class="w3-opacity">
       <div id="projects-container"></div>
     </div>
@@ -128,94 +141,90 @@
     <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="languages">
       <h2 class="w3-text-light-grey">Languages Used</h2>
       <hr style="width:200px" class="w3-opacity">
-      <div class="language-chart" id="language-chart"></div>
+      <div id="language-chart" class="language-chart"></div>
     </div>
 
     <!-- Contact Section -->
-    <div class="w3-padding-24 w3-content w3-text-grey" id="contact">
+    <div class="w3-content w3-padding-64" id="contact">
       <h2 class="w3-text-light-grey">Contact Me</h2>
-      <hr style="width:200px" class="w3-opacity">
-      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge"></i> Baltistan, Pakistan</p>
-      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge"></i> +92 340 8452974</p>
-      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge"></i> shadbalti2@gmail.com</p>
+      <p><i class="fa fa-map-marker fa-fw w3-text-white"></i> Baltistan, Pakistan</p>
+      <p><i class="fa fa-phone fa-fw w3-text-white"></i> +923408452974</p>
+      <p><i class="fa fa-envelope fa-fw w3-text-white"></i> shadbalti2@gmail.com</p>
     </div>
-
-    <!-- Footer -->
-    <footer class="w3-content w3-padding-64 social-icons">
-      <i class="fa fa-facebook-official"></i>
-      <i class="fa fa-instagram"></i>
-      <i class="fa fa-twitter"></i>
-      <i class="fa fa-linkedin"></i>
-    </footer>
-
   </div>
 
   <script>
-    const username = "ShadBalti"; // Replace with your GitHub username
+    // Fetch GitHub Projects
+    async function fetchGitHubProjects() {
+      const username = "ShadBalti"; // Replace with your username
+      const response = await fetch(`https://api.github.com/users/${username}/repos`);
+      const repos = await response.json();
+      const container = document.getElementById('projects-container');
 
-    // Typing effect
-    const text = "I'm Dilshad Hussain";
-    let index = 0;
-    function typeWriter() {
-      if (index < text.length) {
-        document.getElementById("typed-text").innerHTML += text.charAt(index);
-        index++;
-        setTimeout(typeWriter, 100);
-      }
-    }
-    typeWriter();
-
-    // Fetch GitHub Projects and Languages
-    async function fetchGitHubData() {
-      const repoResponse = await fetch(`https://api.github.com/users/${username}/repos`);
-      const repos = await repoResponse.json();
-      const languages = {};
-
-      const projectsContainer = document.getElementById('projects-container');
       repos.forEach(repo => {
         const projectCard = document.createElement('div');
         projectCard.classList.add('project-card');
         projectCard.innerHTML = `
           <h3>${repo.name}</h3>
-          <p>${repo.description || "No description available."}</p>
-          <div class="stats">
-            <span>⭐ ${repo.stargazers_count}</span>
-            <span>🍴 ${repo.forks_count}</span>
-            <span>👀 ${repo.watchers_count}</span>
-          </div>
+          <p>${repo.description || 'No description available.'}</p>
           <a href="${repo.html_url}" target="_blank">View on GitHub</a>
         `;
-        projectsContainer.appendChild(projectCard);
+        container.appendChild(projectCard);
+      });
+    }
 
-        // Track languages
+    // Fetch Languages Used
+    async function fetchLanguages() {
+      const username = "ShadBalti";
+      const response = await fetch(`https://api.github.com/users/${username}/repos`);
+      const repos = await response.json();
+      const languages = {};
+
+      for (const repo of repos) {
         if (repo.language) {
           languages[repo.language] = (languages[repo.language] || 0) + 1;
         }
-      });
+      }
 
       renderLanguageChart(languages);
     }
 
-    // Render Language Usage Chart
+    // Render Language Chart
     function renderLanguageChart(languages) {
       const chartContainer = document.getElementById('language-chart');
-      Object.keys(languages).forEach(language => {
+      const total = Object.values(languages).reduce((a, b) => a + b, 0);
+
+      for (const [language, count] of Object.entries(languages)) {
+        const percentage = ((count / total) * 100).toFixed(2) + '%';
+
+        const barContainer = document.createElement('div');
+        barContainer.classList.add('chart-bar-container');
+
+        const label = document.createElement('span');
+        label.classList.add('chart-bar-label');
+        label.textContent = language;
+
         const bar = document.createElement('div');
         bar.classList.add('chart-bar');
-        bar.style.width = `${languages[language] * 20}px`;
+        bar.style.width = percentage;
         bar.style.backgroundColor = getRandomColor();
-        bar.textContent = language;
-        chartContainer.appendChild(bar);
-      });
+        bar.setAttribute('data-percent', percentage);
+
+        barContainer.appendChild(label);
+        barContainer.appendChild(bar);
+        chartContainer.appendChild(barContainer);
+      }
     }
 
-    // Generate Random Color for Chart Bars
+    // Generate Random Color
     function getRandomColor() {
       return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
     }
 
-    fetchGitHubData();
+    // Initialize Functions
+    fetchGitHubProjects();
+    fetchLanguages();
   </script>
 
 </body>
-        </html>
+</html>
