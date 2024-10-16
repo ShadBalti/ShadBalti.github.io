@@ -55,41 +55,35 @@ function typeWriter() {
 // Initialize Portfolio Features
 function initializePortfolio() {
   typeWriter(); // Start typewriter effect
-  fetchGitHubRepos(); // Fetch GitHub repos
+  fetchProjects(); // Fetch GitHub repos
   loadContributionGraph(); // Load GitHub contribution graph
 }
 
-// Fetch GitHub Repositories
-async function fetchGitHubRepos() {
-  try {
-    const response = await fetch('https://api.github.com/users/ShadBalti/repos');
-    if (!response.ok) throw new Error('Failed to fetch repositories.');
+// Fetch GitHub repositories
+async function fetchProjects() {
+  const projectsContainer = document.getElementById("projects-container");
 
-    const repos = await response.json();
-    displayRepos(repos);
+  try {
+    const response = await fetch(`https://api.github.com/users/${githubUsername}/repos`);
+    if (!response.ok) throw new Error("Failed to fetch repositories");
+
+    const projects = await response.json();
+    projects.forEach(project => {
+      const projectElement = document.createElement("div");
+      projectElement.classList.add("project");
+      projectElement.innerHTML = `
+        <h3>${project.name}</h3>
+        <p>${project.description || "No description available."}</p>
+        <a href="${project.html_url}" target="_blank">View Project</a>
+      `;
+      projectsContainer.appendChild(projectElement);
+    });
   } catch (error) {
-    console.error('Error fetching GitHub repositories:', error);
+    console.error("Error:", error);
+    projectsContainer.innerHTML = `<p>Unable to load projects.</p>`;
   }
 }
 
-// Display Repositories
-function displayRepos(repos) {
-  const repoList = document.getElementById('projects-container');
-  repoList.innerHTML = ''; // Clear previous content
-
-  repos.forEach(repo => {
-    const repoItem = document.createElement('li');
-    repoItem.className = 'repo-item';
-    repoItem.innerHTML = `
-      <a href="${repo.html_url}" target="_blank">${repo.name}</a>
-      <p>${repo.description || 'No description provided.'}</p>
-      <span class="language ${repo.language ? repo.language.toLowerCase() : 'unknown'}">
-        ${repo.language || 'Unknown'}
-      </span>
-    `;
-    repoList.appendChild(repoItem);
-  });
-}
 
 // Load GitHub Contributions Graph
 function loadContributionGraph() {
