@@ -91,19 +91,6 @@ body {
 }
 
 
-/* Main Content */
-#main {
-  margin-left: 120px;
-  padding: 16px;
-}
-
-/* Responsive for small screens */
-@media (max-width: 600px) {
-  #main {
-    margin-left: 0;
-  }
-}
-
 /* Header Section */
 header {
   padding: 64px 0;
