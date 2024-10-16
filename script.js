@@ -74,7 +74,7 @@ async function fetchGitHubRepos() {
 
 // Display Repositories
 function displayRepos(repos) {
-  const repoList = document.getElementById('repo-list');
+  const repoList = document.getElementById('projects-container');
   repoList.innerHTML = ''; // Clear previous content
 
   repos.forEach(repo => {
