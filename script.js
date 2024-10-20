@@ -70,7 +70,7 @@ async function fetchProjects() {
     const projects = await response.json();
     projects.forEach(project => {
       const projectElement = document.createElement("div");
-      projectElement.classList.add("project-card");
+      projectElement.classList.add(" project-card");
       projectElement.innerHTML = `
         <h3>${project.name}</h3>
         <p>${project.description || "No description available."}</p>
