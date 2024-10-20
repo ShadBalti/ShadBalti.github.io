@@ -64,7 +64,7 @@ async function fetchProjects() {
   const projectsContainer = document.getElementById("projects-container");
 
   try {
-    const response = await fetch(`https://api.github.com/users/${githubUsername}/repos`);
+    const response = await fetch(`https://api.github.com/users/ShadBalti/repos`);
     if (!response.ok) throw new Error("Failed to fetch repositories");
 
     const projects = await response.json();
