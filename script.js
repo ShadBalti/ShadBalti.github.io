@@ -80,7 +80,7 @@ async function fetchProjects() {
     });
   } catch (error) {
     console.error("Error:", error);
-    projectsContainer.innerHTML = `<p>Unable to load projects.</p>`;
+    projectsContainer.innerHTML = `<p>Unable to load projects. ${error}</p>`;
   }
 }
 
