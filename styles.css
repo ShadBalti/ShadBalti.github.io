@@ -138,42 +138,69 @@ header img {
   margin-top: 32px;
 }
 
-.project-card {
-  background-color: #1c1c1c;
-  padding: 16px;
-  border-radius: 8px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+/* Styling the Project Cards */
+    .project-card {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-.project-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-}
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
 
-.project-card h3 {
-  margin-top: 0;
-  font-size: 22px;
-}
+    /* Header with Avatar and Title */
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
 
-.project-card p {
-  font-size: 16px;
-  margin: 8px 0;
-}
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #555;
+      object-fit: cover;
+    }
 
-.language-badge {
-  display: inline-block;
-  padding: 4px 8px;
-  margin: 4px 4px 0 0;
-  font-size: 14px;
-  border-radius: 12px;
-  color: #fff;
-}
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #81c784;
+    }
 
-.language-badge.JavaScript { background-color: #f0db4f; color: #000; }
-.language-badge.HTML { background-color: #e34c26; }
-.language-badge.CSS { background-color: #2965f1; }
-.language-badge.Python { background-color: #3572A5; }
-.language-badge.Java { background-color: #b07219; }
+    /* Project Details */
+    .project-details {
+      margin: 10px 0;
+    }
+
+    .project-details p {
+      margin: 5px 0;
+    }
+
+    /* Link to View Project */
+    .view-project {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #03a9f4;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .view-project:hover {
+      background-color: #0288d1;
+    }
 
 /* Contact Section */
 textarea {
