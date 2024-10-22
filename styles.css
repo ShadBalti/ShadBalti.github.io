@@ -91,6 +91,9 @@ body {
   .contribution-graph {
    display: none;
   }
+  .github-stats {
+    overflow: scroll;
+  }
 }
 
 
