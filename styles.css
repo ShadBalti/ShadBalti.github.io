@@ -88,6 +88,9 @@ body {
   .navbar-toggle {
     display: block;
   }
+  .contribution-graph {
+   display: none;
+  }
 }
 
 
