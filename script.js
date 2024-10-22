@@ -57,7 +57,6 @@ function initializePortfolio() {
   typeWriter(); // Start typewriter effect
   fetchProjects(); // Fetch GitHub repos
   loadContributionGraph(); // Load GitHub contribution graph
-  fetchHashnodePosts('shadbalti');
 }
 
 const projectsContainer = document.getElementById("projects-container");
@@ -198,7 +197,7 @@ async function fetchHashnodePosts(username) {
     blogsContainer.innerHTML = `<p>Unable to load blogs. ${error.message}</p>`;
   }
 }
-
+fetchHashnodePosts('shadbalti');
 
 // Run Initialization on Page Load
 document.addEventListener('DOMContentLoaded', initializePortfolio);
