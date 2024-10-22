@@ -59,16 +59,27 @@ function initializePortfolio() {
   loadContributionGraph(); // Load GitHub contribution graph
 }
 
-// Fetch GitHub repositories
-async function fetchProjects() {
-  const projectsContainer = document.getElementById("projects-container");
+const projectsContainer = document.getElementById("projects-container");
 
+// Function to fetch languages for a specific repository
+async function fetchLanguages(repoName) {
+  const response = await fetch(`https://api.github.com/repos/ShadBalti/${repoName}/languages`);
+  if (!response.ok) throw new Error(`Failed to fetch languages for ${repoName}`);
+  return await response.json();
+}
+
+async function fetchProjects() {
   try {
     const response = await fetch(`https://api.github.com/users/ShadBalti/repos`);
     if (!response.ok) throw new Error("Failed to fetch repositories");
 
     const projects = await response.json();
-    projects.forEach((project) => {
+
+    // Iterate over each project and display its data
+    for (const project of projects) {
+      const languages = await fetchLanguages(project.name);
+      const languagesList = Object.keys(languages).join(", ") || "No languages found";
+
       const projectElement = document.createElement("div");
       projectElement.classList.add("project-card");
 
@@ -78,16 +89,19 @@ async function fetchProjects() {
           <h3>${project.name}</h3>
         </div>
         <p>${project.description || "No description available."}</p>
-        <p><strong>Language:</strong> ${project.language || "N/A"}</p>
-        <p><strong>Stars:</strong> ${project.stargazers_count} ⭐</p>
-        <p><strong>Forks:</strong> ${project.forks_count} 🍴</p>
-        <p><strong>Watchers:</strong> ${project.watchers_count}</p>
-        <p><strong>License:</strong> ${project.license?.name || "No License"}</p>
-        <p><strong>Last Updated:</strong> ${new Date(project.updated_at).toLocaleDateString()}</p>
-        <a href="${project.html_url}" target="_blank">View Project</a>
+        <div class="project-details">
+          <p><strong>Languages:</strong> ${languagesList}</p>
+          <p><strong>Stars:</strong> ${project.stargazers_count} ⭐</p>
+          <p><strong>Forks:</strong> ${project.forks_count} 🍴</p>
+          <p><strong>Watchers:</strong> ${project.watchers_count}</p>
+          <p><strong>License:</strong> ${project.license?.name || "No License"}</p>
+          <p><strong>Last Updated:</strong> ${new Date(project.updated_at).toLocaleDateString()}</p>
+        </div>
+        <a href="${project.html_url}" target="_blank" class="view-project">View Project</a>
       `;
+
       projectsContainer.appendChild(projectElement);
-    });
+    }
   } catch (error) {
     console.error("Error:", error);
     projectsContainer.innerHTML = `<p>Unable to load projects. ${error.message}</p>`;
