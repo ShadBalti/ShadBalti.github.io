@@ -176,16 +176,26 @@ header img {
       color: #81c784;
     }
 
-    /* Project Details */
     .project-details {
-      margin: 10px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+      margin-top: 10px;
     }
 
-    .project-details p {
-      margin: 5px 0;
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #b0bec5;
     }
 
-    /* Link to View Project */
+    .detail-item i {
+      font-size: 1.2rem;
+      color: #81c784;
+    }
+
     .view-project {
       display: inline-block;
       margin-top: 10px;
