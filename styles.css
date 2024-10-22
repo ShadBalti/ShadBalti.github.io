@@ -89,7 +89,7 @@ body {
     display: block;
   }
   .contribution-graph {
-   display: none;
+   overflow: scroll;
   }
   .github-stats {
     overflow: scroll;
