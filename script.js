@@ -217,7 +217,7 @@ async function fetchHashnodePosts(username) {
 }
 
 
-fetchHashnodePosts('ShadBalti');
+fetchHashnodePosts('shadbalti');
 
 // Run Initialization on Page Load
 document.addEventListener('DOMContentLoaded', initializePortfolio);
