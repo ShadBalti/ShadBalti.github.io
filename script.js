@@ -74,6 +74,7 @@ async function fetchProjects() {
     if (!response.ok) throw new Error("Failed to fetch repositories");
 
     const projects = await response.json();
+    projectsContainer.innerHTML = ""; // Clear previous projects
 
     // Iterate over each project and display its data
     for (const project of projects) {
@@ -91,29 +92,29 @@ async function fetchProjects() {
         <p>${project.description || "No description available."}</p>
         <div class="project-details">
           <div class="detail-item">
-                <i class="fas fa-code"></i>
-                <span><strong>Languages:</strong> ${languagesList}</span>
-              </div>
-              <div class="detail-item">
-                <i class="fas fa-star"></i>
-                <span><strong>Stars:</strong> ${project.stargazers_count} ⭐</span>
-              </div>
-              <div class="detail-item">
-                <i class="fas fa-code-branch"></i>
-                <span><strong>Forks:</strong> ${project.forks_count} 🍴</span>
-              </div>
-              <div class="detail-item">
-                <i class="fas fa-eye"></i>
-                <span><strong>Watchers:</strong> ${project.watchers_count}</span>
-              </div>
-              <div class="detail-item">
-                <i class="fas fa-file-alt"></i>
-                <span><strong>License:</strong> ${project.license?.name || "No License"}</span>
-              </div>
-              <div class="detail-item">
-                <i class="fas fa-calendar-alt"></i>
-                <span><strong>Last Updated:</strong> ${new Date(project.updated_at).toLocaleDateString()}</span>
-              </div>
+            <i class="fas fa-code"></i>
+            <span><strong>Languages:</strong> ${languagesList}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-star"></i>
+            <span><strong>Stars:</strong> ${project.stargazers_count} ⭐</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-code-branch"></i>
+            <span><strong>Forks:</strong> ${project.forks_count} 🍴</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-eye"></i>
+            <span><strong>Watchers:</strong> ${project.watchers_count}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-file-alt"></i>
+            <span><strong>License:</strong> ${project.license?.name || "No License"}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span><strong>Last Updated:</strong> ${new Date(project.updated_at).toLocaleDateString()}</span>
+          </div>
         </div>
         <a href="${project.html_url}" target="_blank" class="view-project">View Project</a>
       `;
@@ -125,7 +126,6 @@ async function fetchProjects() {
     projectsContainer.innerHTML = `<p>Unable to load projects. ${error.message}</p>`;
   }
 }
-
 
 // Load GitHub Contributions Graph
 function loadContributionGraph() {
@@ -169,7 +169,7 @@ async function fetchHashnodePosts(username) {
     if (!response.ok) throw new Error('Failed to fetch blogs');
 
     const result = await response.json();
-    const posts = result.data.user.publication.posts;
+    const posts = result.data.user?.publication?.posts || [];
 
     posts.forEach((post) => {
       const postElement = document.createElement('div');
@@ -197,8 +197,8 @@ async function fetchHashnodePosts(username) {
     blogsContainer.innerHTML = `<p>Unable to load blogs. ${error.message}</p>`;
   }
 }
+
 fetchHashnodePosts('shadbalti');
 
 // Run Initialization on Page Load
 document.addEventListener('DOMContentLoaded', initializePortfolio);
-
