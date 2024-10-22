@@ -94,6 +94,9 @@ body {
   .github-stats {
     overflow: scroll;
   }
+  .typewritertext {
+    font-size: smaller;
+   }
 }
 
 
