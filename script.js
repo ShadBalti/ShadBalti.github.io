@@ -68,19 +68,29 @@ async function fetchProjects() {
     if (!response.ok) throw new Error("Failed to fetch repositories");
 
     const projects = await response.json();
-    projects.forEach(project => {
+    projects.forEach((project) => {
       const projectElement = document.createElement("div");
       projectElement.classList.add("project-card");
+
       projectElement.innerHTML = `
-        <h3>${project.name}</h3>
+        <div class="project-header">
+          <img src="${project.owner.avatar_url}" alt="${project.owner.login}" class="avatar" />
+          <h3>${project.name}</h3>
+        </div>
         <p>${project.description || "No description available."}</p>
+        <p><strong>Language:</strong> ${project.language || "N/A"}</p>
+        <p><strong>Stars:</strong> ${project.stargazers_count} ⭐</p>
+        <p><strong>Forks:</strong> ${project.forks_count} 🍴</p>
+        <p><strong>Watchers:</strong> ${project.watchers_count}</p>
+        <p><strong>License:</strong> ${project.license?.name || "No License"}</p>
+        <p><strong>Last Updated:</strong> ${new Date(project.updated_at).toLocaleDateString()}</p>
         <a href="${project.html_url}" target="_blank">View Project</a>
       `;
       projectsContainer.appendChild(projectElement);
     });
   } catch (error) {
     console.error("Error:", error);
-    projectsContainer.innerHTML = `<p>Unable to load projects. ${error}</p>`;
+    projectsContainer.innerHTML = `<p>Unable to load projects. ${error.message}</p>`;
   }
 }
 
