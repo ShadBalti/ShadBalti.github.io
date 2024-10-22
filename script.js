@@ -169,7 +169,14 @@ async function fetchHashnodePosts(username) {
     if (!response.ok) throw new Error('Failed to fetch blogs');
 
     const result = await response.json();
+    console.log("API Result:", result);  // Log the full response
+
     const posts = result.data.user?.publication?.posts || [];
+
+    if (posts.length === 0) {
+      blogsContainer.innerHTML = `<p>No blog posts found.</p>`;
+      return;
+    }
 
     posts.forEach((post) => {
       const postElement = document.createElement('div');
@@ -196,8 +203,7 @@ async function fetchHashnodePosts(username) {
     console.error('Error:', error);
     blogsContainer.innerHTML = `<p>Unable to load blogs. ${error.message}</p>`;
   }
-}
-
+ }
 fetchHashnodePosts('shadbalti');
 
 // Run Initialization on Page Load
