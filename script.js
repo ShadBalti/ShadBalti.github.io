@@ -25,7 +25,7 @@ function getRandomColor() {
 // Apply Colors to Each Word
 function getColorfulText(phrase) {
   const words = phrase.split(' ');
-  return words.map(word => `<span style="color: ${getRandomColor()}">${word}</span>`).join(' ');
+  return words.map(word => `<span style="color: ${getRandomColor()}" class="typewritertext">${word}</span>`).join(' ');
 }
 
 // Typewriter Effect Logic
