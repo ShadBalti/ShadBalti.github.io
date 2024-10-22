@@ -57,6 +57,7 @@ function initializePortfolio() {
   typeWriter(); // Start typewriter effect
   fetchProjects(); // Fetch GitHub repos
   loadContributionGraph(); // Load GitHub contribution graph
+  fetchHashnodePosts('shadbalti');
 }
 
 const projectsContainer = document.getElementById("projects-container");
@@ -134,6 +135,70 @@ function loadContributionGraph() {
     <img src="https://ghchart.rshah.org/ShadBalti" alt="GitHub Contribution Graph">
   `;
 }
+
+const blogsContainer = document.getElementById("blogs-container");
+
+async function fetchHashnodePosts(username) {
+  const query = `
+    query {
+      user(username: "${username}") {
+        publication {
+          posts {
+            title
+            brief
+            slug
+            coverImage
+            dateAdded
+            totalReactions
+            responseCount
+            readingTime
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch('https://api.hashnode.com/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query }),
+    });
+
+    if (!response.ok) throw new Error('Failed to fetch blogs');
+
+    const result = await response.json();
+    const posts = result.data.user.publication.posts;
+
+    posts.forEach((post) => {
+      const postElement = document.createElement('div');
+      postElement.classList.add('blog-card');
+
+      postElement.innerHTML = `
+        <img src="${post.coverImage}" alt="${post.title}" class="cover-image" />
+        <div class="blog-content">
+          <h3>${post.title}</h3>
+          <p>${post.brief}</p>
+          <div class="blog-details">
+            <span class="badge reactions">❤️ ${post.totalReactions} Reactions</span>
+            <span class="badge comments">💬 ${post.responseCount} Comments</span>
+            <span class="badge reading-time">⏳ ${post.readingTime} min read</span>
+            <span class="badge date">📅 ${new Date(post.dateAdded).toLocaleDateString()}</span>
+          </div>
+          <a href="https://${username}.hashnode.dev/${post.slug}" target="_blank" class="read-more">Read More</a>
+        </div>
+      `;
+
+      blogsContainer.appendChild(postElement);
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    blogsContainer.innerHTML = `<p>Unable to load blogs. ${error.message}</p>`;
+  }
+}
+
 
 // Run Initialization on Page Load
 document.addEventListener('DOMContentLoaded', initializePortfolio);
