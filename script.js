@@ -90,12 +90,30 @@ async function fetchProjects() {
         </div>
         <p>${project.description || "No description available."}</p>
         <div class="project-details">
-          <p><strong>Languages:</strong> ${languagesList}</p>
-          <p><strong>Stars:</strong> ${project.stargazers_count} ⭐</p>
-          <p><strong>Forks:</strong> ${project.forks_count} 🍴</p>
-          <p><strong>Watchers:</strong> ${project.watchers_count}</p>
-          <p><strong>License:</strong> ${project.license?.name || "No License"}</p>
-          <p><strong>Last Updated:</strong> ${new Date(project.updated_at).toLocaleDateString()}</p>
+          <div class="detail-item">
+                <i class="fas fa-code"></i>
+                <span><strong>Languages:</strong> ${languagesList}</span>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-star"></i>
+                <span><strong>Stars:</strong> ${project.stargazers_count} ⭐</span>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-code-branch"></i>
+                <span><strong>Forks:</strong> ${project.forks_count} 🍴</span>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-eye"></i>
+                <span><strong>Watchers:</strong> ${project.watchers_count}</span>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-file-alt"></i>
+                <span><strong>License:</strong> ${project.license?.name || "No License"}</span>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span><strong>Last Updated:</strong> ${new Date(project.updated_at).toLocaleDateString()}</span>
+              </div>
         </div>
         <a href="${project.html_url}" target="_blank" class="view-project">View Project</a>
       `;
