@@ -149,11 +149,11 @@ async function fetchHashnodePosts(username) {
               title
               brief
               url
-              coverImage  // Add cover image field
-              dateAdded   // Add publication date
-              totalReactions // Add total reactions
-              readingTime // Add reading time
-              responseCount // Add response count
+              coverImage
+              dateAdded
+              totalReactions
+              readingTime
+              responseCount
             }
           }
         }
@@ -217,7 +217,7 @@ async function fetchHashnodePosts(username) {
 }
 
 
-fetchHashnodePosts('shadbalti');
+fetchHashnodePosts('ShadBalti');
 
 // Run Initialization on Page Load
 document.addEventListener('DOMContentLoaded', initializePortfolio);
