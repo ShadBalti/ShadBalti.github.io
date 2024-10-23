@@ -78,7 +78,7 @@ async function fetchProjects() {
 
     // Iterate over each project and display its data
     for (const project of projects) {
-     if(project.fork === false){
+     if(project.fork === true){
       const languages = await fetchLanguages(project.name);
       const languagesList = Object.keys(languages).join(", ") || "No languages found";
 
