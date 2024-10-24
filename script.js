@@ -139,74 +139,39 @@ function loadContributionGraph() {
 
 const blogsContainer = document.getElementById("blogs-container");
 
-async function fetchHashnodePosts(username) {
-  const query = `
-    query {
-      publication(host: "${username}.hashnode.dev/") {
-        isTeam
-        title
-        posts(first: 10) {
-          edges {
-            node {
-              title
-              brief
-              url
-              coverImage
-              dateAdded
-              totalReactions
-              readingTime
-              responseCount
-            }
-          }
-        }
-      }
-    }
-  `;
+async function fetchDevToPosts(username) {
+  const url = `https://dev.to/api/articles?username=${username}&per_page=10`;
 
   try {
-    const response = await fetch('https://api.hashnode.com/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query }),
-    });
+    const response = await fetch(url);
 
-    if (!response.ok) throw new Error('Failed to fetch blogs');
+    if (!response.ok) throw new Error('Failed to fetch articles');
 
-    const result = await response.json();
-    console.log("API Result:", result);  // Log the full response for debugging
-
-    // Check if publication exists
-    if (!result.data.publication) {
-      blogsContainer.innerHTML = `<p>Publication not found for user: ${username}.</p>`;
-      return;
-    }
-
-    const posts = result.data.publication.posts.edges;
+    const posts = await response.json();
+    console.log("API Result:", posts);  // Log the full response for debugging
 
     // Check if posts are available
     if (posts.length === 0) {
-      blogsContainer.innerHTML = `<p>No blog posts found.</p>`;
+      blogsContainer.innerHTML = `<p>No articles found for user: ${username}.</p>`;
       return;
     }
 
-    posts.forEach(({ node }) => {
+    posts.forEach((post) => {
       const postElement = document.createElement('div');
       postElement.classList.add('blog-card');
 
       postElement.innerHTML = `
-        <img src="${node.coverImage || 'default-image.jpg'}" alt="${node.title}" class="cover-image" />
+        <img src="${post.cover_image || 'default-image.jpg'}" alt="${post.title}" class="cover-image" />
         <div class="blog-content">
-          <h3>${node.title}</h3>
-          <p>${node.brief || "No brief available."}</p>
+          <h3>${post.title}</h3>
+          <p>${post.description || "No description available."}</p>
           <div class="blog-details">
-            <span class="badge reactions">❤️ ${node.totalReactions} Reactions</span>
-            <span class="badge comments">💬 ${node.responseCount} Comments</span>
-            <span class="badge reading-time">⏳ ${node.readingTime} min read</span>
-            <span class="badge date">📅 ${new Date(node.dateAdded).toLocaleDateString()}</span>
+            <span class="badge reactions">❤️ ${post.positive_reactions_count} Reactions</span>
+            <span class="badge comments">💬 ${post.comments_count} Comments</span>
+            <span class="badge reading-time">⏳ ${post.reading_time_minutes} min read</span>
+            <span class="badge date">📅 ${new Date(post.published_at).toLocaleDateString()}</span>
           </div>
-          <a href="${node.url}" target="_blank" class="read-more">Read More</a>
+          <a href="${post.url}" target="_blank" class="read-more">Read More</a>
         </div>
       `;
 
@@ -214,12 +179,10 @@ async function fetchHashnodePosts(username) {
     });
   } catch (error) {
     console.error('Error:', error);
-    blogsContainer.innerHTML = `<p>Unable to load blogs. ${error.message}</p>`;
+    blogsContainer.innerHTML = `<p>Unable to load articles. ${error.message}</p>`;
   }
 }
 
-
-fetchHashnodePosts('shadbalti');
-
+fetchDevToPosts('shadbalti');
 // Run Initialization on Page Load
 document.addEventListener('DOMContentLoaded', initializePortfolio);
