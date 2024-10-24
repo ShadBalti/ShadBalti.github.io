@@ -166,19 +166,21 @@ async function fetchDevToPosts(username) {
       postElement.classList.add('blog-card');
 
       postElement.innerHTML = `
-        <img src="${post.cover_image || 'default-image.jpg'}" alt="${post.title}" class="cover-image" />
-        <div class="blog-content">
-          <h3>${post.title}</h3>
-          <p>${post.description || "No description available."}</p>
-          <div class="blog-details">
-            <span class="badge reactions">❤️ ${post.positive_reactions_count} Reactions</span>
-            <span class="badge comments">💬 ${post.comments_count} Comments</span>
-            <span class="badge reading-time">⏳ ${post.reading_time_minutes} min read</span>
-            <span class="badge date">📅 ${new Date(post.published_at).toLocaleDateString()}</span>
-          </div>
-          <a href="${post.url}" target="_blank" class="read-more">Read More</a>
-        </div>
-      `;
+  <img src="${post.cover_image || 'default-image.jpg'}" alt="${post.title}" class="cover-image" />
+  <div class="blog-content">
+    <h3>${post.title}</h3>
+    <p>${post.description || "No description available."}</p>
+    <div class="blog-details">
+      <span class="badge reactions">❤️ ${post.positive_reactions_count} Reactions</span>
+      <span class="badge comments">💬 ${post.comments_count} Comments</span>
+      <span class="badge reading-time">⏳ ${post.reading_time_minutes} min read</span>
+      <span class="badge date">📅 ${new Date(post.published_at).toLocaleDateString()}</span>
+    </div>
+    <a href="${post.url}" target="_blank" class="read-more">
+      Read more about "${post.title}"
+    </a>
+  </div>
+`;
 
       blogsContainer.appendChild(postElement);
     });
