@@ -117,7 +117,12 @@ async function fetchProjects() {
             <span><strong>Last Updated:</strong> ${new Date(project.updated_at).toLocaleDateString()}</span>
           </div>
         </div>
-        <a href="${project.html_url}" target="_blank" class="view-project">View Project</a>
+         <div class="project-links">
+    <a href="${project.html_url}" target="_blank" class="view-project">View Project</a>
+    ${project.homepage 
+      ? `<a href="${project.homepage}" target="_blank" class="view-demo">Live Demo</a>` 
+      : `<span class="no-demo">No Live Demo Available</span>`}
+  </div>
       `;
 
       projectsContainer.appendChild(projectElement);
