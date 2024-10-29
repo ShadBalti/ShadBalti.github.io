@@ -145,7 +145,7 @@ function loadContributionGraph() {
 const blogsContainer = document.getElementById("blogs-container");
 
 async function fetchDevToPosts(username) {
-  const url = `https://dev.to/api/articles?username=${username}&per_page=10`;
+  const url = `https://dev.to/api/articles?username=${username}`;
 
   try {
     const response = await fetch(url);
