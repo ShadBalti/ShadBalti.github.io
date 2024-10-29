@@ -160,7 +160,7 @@ async function fetchProjects() {
           commitElement.innerHTML = `
   <div class="commit-header">
     <div class="commit-author-info">
-      <img src=`https://avatars.githubusercontent.com/${commit.author?.login || ''}` alt="Author Avatar" class="author-avatar" />
+      <img src="https://avatars.githubusercontent.com/${commit.author?.login || ''}" alt="Author Avatar" class="author-avatar" />
       <span class="author-name">${commit.commit.author.name}</span>
       <span class="commit-hash">(${commit.sha.slice(0, 7)})</span>
     </div>
