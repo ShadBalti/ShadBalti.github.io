@@ -391,12 +391,6 @@ p {
       cursor: pointer;
     }
 
-    .commit-item {
-      background-color: #f0f0f0;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-    }
 
     .commit-item p {
       margin: 5px 0;
@@ -410,7 +404,78 @@ p {
       text-decoration: none;
       color: #007bff;
     }
+/* Commit Item Styles */
+.commit-item {
+  background-color: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
 
+.commit-item:hover {
+  background-color: #ebedf0;
+}
+
+.commit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.commit-author-info {
+  display: flex;
+  align-items: center;
+}
+
+.author-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.author-name {
+  font-weight: bold;
+  margin-right: 6px;
+  color: #0366d6;
+}
+
+.commit-hash {
+  font-family: monospace;
+  color: #586069;
+}
+
+.commit-date {
+  font-size: 14px;
+  color: #6a737d;
+}
+
+.commit-message {
+  font-size: 16px;
+  color: #24292f;
+  margin: 8px 0;
+  font-weight: 500;
+}
+
+.commit-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.view-commit-link {
+  text-decoration: none;
+  color: #0366d6;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+}
+
+.view-commit-link i {
+  margin-right: 4px;
+}
 
 
 /* Contact Section */
