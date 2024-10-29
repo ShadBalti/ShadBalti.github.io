@@ -60,6 +60,11 @@ function initializePortfolio() {
 }
 
 const projectsContainer = document.getElementById("projects-container");
+  const modal = document.getElementById('modal');
+    const overlay = document.getElementById('overlay');
+    const closeModalButton = document.getElementById('closeModal');
+    const modalContent = document.getElementById('modalContent');
+
 
 // Function to fetch languages for a specific repository
 async function fetchLanguages(repoName) {
@@ -89,6 +94,8 @@ async function fetchProjects() {
         <div class="project-header">
           <img src="${project.owner.avatar_url}" alt="${project.owner.login}" class="avatar" />
           <h3>${project.name}</h3>
+          <button class="show-commit-button" data-project="${project.name}">Show Commits</button>
+
         </div>
         <p>${project.description || "No description available."}</p>
         <div class="project-details">
@@ -126,6 +133,9 @@ async function fetchProjects() {
       `;
 
       projectsContainer.appendChild(projectElement);
+// Add event listener to "Show Commits" button
+            const showCommitButton = projectElement.querySelector(".show-commit-button");
+            showCommitButton.addEventListener("click", () => showCommits(project.name));
      }
     }
   } catch (error) {
@@ -133,6 +143,76 @@ async function fetchProjects() {
     projectsContainer.innerHTML = `<p>Unable to load projects. ${error.message}</p>`;
   }
 }
+
+// Fetch and display recent commits
+    async function showCommits(projectName) {
+  try {
+    const response = await fetch(`https://api.github.com/repos/ShadBalti/${projectName}/commits`);
+    if (!response.ok) throw new Error("Failed to fetch commits");
+
+    const commits = await response.json();
+    modalContent.innerHTML = ""; // Clear previous content
+
+    commits.slice(0, 5).forEach(async (commit) => {
+      const commitElement = document.createElement("div");
+      commitElement.classList.add("commit-item");
+
+      // Fetch commit details for files changed
+      const commitDetailsResponse = await fetch(commit.url);
+      const commitDetails = await commitDetailsResponse.json();
+
+      // Create the commit element
+      commitElement.innerHTML = `
+        <div class="commit-header">
+          <div class="commit-author-info">
+            <img src="https://avatars.githubusercontent.com/${commit.author?.login || ''}" 
+                 alt="Author Avatar" class="author-avatar" />
+            <span class="author-name">${commit.commit.author.name}</span>
+            <span class="commit-hash">(${commit.sha.slice(0, 7)})</span>
+          </div>
+          <div class="commit-date">${new Date(commit.commit.author.date).toLocaleString()}</div>
+        </div>
+        <p class="commit-message">${commit.commit.message}</p>
+        <div class="files-changed">
+          <strong>Files Changed:</strong>
+          <ul>
+            ${commitDetails.files.map(file => `
+              <li>
+                <span>${file.filename}</span>
+                <span class="additions">+${file.additions}</span>
+                <span class="deletions">-${file.deletions}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        <p class="committer-name"><strong>Committer:</strong> ${commit.committer ? commit.committer.login : "N/A"}</p>
+        <div class="commit-actions">
+          <a href="${commit.html_url}" target="_blank" class="view-commit-link">
+            <i class="fas fa-code-branch"></i> View on GitHub
+          </a>
+        </div>
+      `;
+      modalContent.appendChild(commitElement);
+    });
+
+    modal.style.display = 'block';
+    overlay.style.display = 'block';
+  } catch (error) {
+    modalContent.innerHTML = `<p>Error: ${error.message}</p>`;
+  }
+}
+    // Close the modal
+    function closeModal() {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+    }
+
+    closeModalButton.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+
+
+
+
 
 // Load GitHub Contributions Graph
 function loadContributionGraph() {
