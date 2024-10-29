@@ -347,6 +347,15 @@ p {
       border-color: #6a6a6a;
     }
 
+/* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1e1e1e; /* Dark background */
+  color: #c9d1d9; /* Light text color */
+  margin: 0;
+  padding: 20px;
+}
+
 /* Modal and Overlay Styles */
 .overlay {
   display: none;
@@ -355,7 +364,7 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9); /* Darker overlay */
   z-index: 1000;
 }
 
@@ -366,41 +375,21 @@ p {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  max-width: 600px;
-  background-color: #ffffff;
+  max-width: 800px;
+  background-color: #2d2d2d; /* Dark modal */
   border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
   z-index: 1500;
   padding: 20px;
   max-height: 80%;
   overflow-y: auto;
-}
-
-/* Modal Header */
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #e1e4e8;
-  padding-bottom: 10px;
-}
-
-.close-button {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #586069;
-}
-
-.close-button:hover {
-  color: #24292f;
+  border: 1px solid #444; /* Slightly lighter border */
 }
 
 /* Commit Item Styles */
 .commit-item {
-  background-color: #f6f8fa;
-  border: 1px solid #e1e4e8;
+  background-color: #212121; /* Dark commit item */
+  border: 1px solid #444; /* Slightly lighter border */
   padding: 15px;
   margin: 10px 0;
   border-radius: 6px;
@@ -408,7 +397,7 @@ p {
 }
 
 .commit-item:hover {
-  background-color: #ebedf0;
+  background-color: #333; /* Lighter on hover */
 }
 
 .commit-header {
@@ -424,50 +413,118 @@ p {
 }
 
 .author-avatar {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   margin-right: 8px;
 }
 
 .author-name {
   font-weight: bold;
-  color: #0366d6;
+  color: #58a6ff; /* Light blue for author name */
   margin-right: 6px;
 }
 
 .commit-hash {
   font-family: monospace;
-  color: #586069;
+  color: #9e9e9e; /* Gray color for commit hash */
 }
 
 .commit-date {
   font-size: 14px;
-  color: #6a737d;
+  color: #b0b0b0; /* Light gray for date */
 }
 
 .commit-message {
   font-size: 15px;
-  color: #24292f;
+  color: #e1e1e1; /* Lighter message color */
   margin: 10px 0;
   font-weight: 500;
+  line-height: 1.4; /* Increased line height for better readability */
 }
 
+/* Files Changed Styles */
+.files-changed {
+  margin-top: 10px;
+  background-color: #2d2d2d; /* Dark background for files changed */
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #444; /* Border for files changed section */
+}
+
+.files-changed ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.files-changed li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #444; /* Lighter border for separation */
+}
+
+.files-changed li:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+.additions {
+  color: #1db954; /* Green color for additions */
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.deletions {
+  color: #ff3b30; /* Red color for deletions */
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* Committer Name Styles */
+.committer-name {
+  color: #c9d1d9; /* Light text color for committer */
+}
+
+/* Commit Actions Styles */
 .commit-actions {
   display: flex;
   justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .view-commit-link {
   text-decoration: none;
-  color: #0366d6;
+  color: #58a6ff; /* Light blue for the link */
   font-weight: bold;
   display: inline-flex;
   align-items: center;
+  transition: color 0.2s;
 }
 
 .view-commit-link i {
   margin-right: 4px;
+}
+
+.view-commit-link:hover {
+  color: #1c7edb; /* Darker blue on hover */
+}
+
+/* Close Button Styles */
+.close-button {
+  background-color: transparent;
+  border: none;
+  color: #c9d1d9;
+  font-size: 18px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #ff3b30; /* Red on hover */
 }
 
 /* Scrollbar Styling for Modal */
