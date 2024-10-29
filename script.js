@@ -60,6 +60,11 @@ function initializePortfolio() {
 }
 
 const projectsContainer = document.getElementById("projects-container");
+  const modal = document.getElementById('modal');
+    const overlay = document.getElementById('overlay');
+    const closeModalButton = document.getElementById('closeModal');
+    const modalContent = document.getElementById('modalContent');
+
 
 // Function to fetch languages for a specific repository
 async function fetchLanguages(repoName) {
@@ -126,6 +131,9 @@ async function fetchProjects() {
       `;
 
       projectsContainer.appendChild(projectElement);
+// Add event listener to "Show Commits" button
+            const showCommitButton = projectElement.querySelector(".show-commit-button");
+            showCommitButton.addEventListener("click", () => showCommits(project.name));
      }
     }
   } catch (error) {
@@ -133,6 +141,54 @@ async function fetchProjects() {
     projectsContainer.innerHTML = `<p>Unable to load projects. ${error.message}</p>`;
   }
 }
+
+// Fetch and display recent commits
+    async function showCommits(projectName) {
+      try {
+        const response = await fetch(`https://api.github.com/repos/ShadBalti/${projectName}/commits`);
+        if (!response.ok) throw new Error("Failed to fetch commits");
+
+        const commits = await response.json();
+        modalContent.innerHTML = ""; // Clear previous content
+
+        commits.slice(0, 5).forEach(commit => {
+          const commitElement = document.createElement("div");
+          commitElement.classList.add("commit-item");
+
+          commitElement.innerHTML = `
+            <p class="commit-message">${commit.commit.message}</p>
+            <p><strong>Author:</strong> ${commit.commit.author.name}</p>
+            <p><strong>Date:</strong> ${new Date(commit.commit.author.date).toLocaleString()}</p>
+            <p class="commit-link"><a href="${commit.html_url}" target="_blank">View Commit on GitHub</a></p>
+          `;
+
+          modalContent.appendChild(commitElement);
+        });
+
+        modal.style.display = 'block';
+        overlay.style.display = 'block';
+      } catch (error) {
+        modalContent.innerHTML = `<p>Error: ${error.message}</p>`;
+      }
+    }
+
+    // Close the modal
+    function closeModal() {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+    }
+
+    closeModalButton.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+
+    // Fetch languages for a project
+    async function fetchLanguages(projectName) {
+      const response = await fetch(`https://api.github.com/repos/ShadBalti/${projectName}/languages`);
+      return response.ok ? await response.json() : {};
+    }
+
+
+
 
 // Load GitHub Contributions Graph
 function loadContributionGraph() {
