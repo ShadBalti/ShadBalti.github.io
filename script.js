@@ -146,44 +146,61 @@ async function fetchProjects() {
 
 // Fetch and display recent commits
     async function showCommits(projectName) {
-      try {
-        const response = await fetch(`https://api.github.com/repos/ShadBalti/${projectName}/commits`);
-        if (!response.ok) throw new Error("Failed to fetch commits");
+  try {
+    const response = await fetch(`https://api.github.com/repos/ShadBalti/${projectName}/commits`);
+    if (!response.ok) throw new Error("Failed to fetch commits");
 
-        const commits = await response.json();
-        modalContent.innerHTML = ""; // Clear previous content
+    const commits = await response.json();
+    modalContent.innerHTML = ""; // Clear previous content
 
-        commits.slice(0, 5).forEach(commit => {
-          const commitElement = document.createElement("div");
-          commitElement.classList.add("commit-item");
+    commits.slice(0, 5).forEach(async (commit) => {
+      const commitElement = document.createElement("div");
+      commitElement.classList.add("commit-item");
 
-          commitElement.innerHTML = `
-  <div class="commit-header">
-    <div class="commit-author-info">
-      <img src="https://avatars.githubusercontent.com/${commit.author?.login || ''}" alt="Author Avatar" class="author-avatar" />
-      <span class="author-name">${commit.commit.author.name}</span>
-      <span class="commit-hash">(${commit.sha.slice(0, 7)})</span>
-    </div>
-    <div class="commit-date">${new Date(commit.commit.author.date).toLocaleString()}</div>
-  </div>
-  <p class="commit-message">${commit.commit.message}</p>
-  <div class="commit-actions">
-    <a href="${commit.html_url}" target="_blank" class="view-commit-link">
-      <i class="fas fa-code-branch"></i> View on GitHub
-    </a>
-  </div>
-`;
+      // Fetch commit details for files changed
+      const commitDetailsResponse = await fetch(commit.url);
+      const commitDetails = await commitDetailsResponse.json();
 
-          modalContent.appendChild(commitElement);
-        });
+      // Create the commit element
+      commitElement.innerHTML = `
+        <div class="commit-header">
+          <div class="commit-author-info">
+            <img src="https://avatars.githubusercontent.com/${commit.author?.login || ''}" 
+                 alt="Author Avatar" class="author-avatar" />
+            <span class="author-name">${commit.commit.author.name}</span>
+            <span class="commit-hash">(${commit.sha.slice(0, 7)})</span>
+          </div>
+          <div class="commit-date">${new Date(commit.commit.author.date).toLocaleString()}</div>
+        </div>
+        <p class="commit-message">${commit.commit.message}</p>
+        <div class="files-changed">
+          <strong>Files Changed:</strong>
+          <ul>
+            ${commitDetails.files.map(file => `
+              <li>
+                <span>${file.filename}</span>
+                <span class="additions">+${file.additions}</span>
+                <span class="deletions">-${file.deletions}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        <p class="committer-name"><strong>Committer:</strong> ${commit.committer ? commit.committer.login : "N/A"}</p>
+        <div class="commit-actions">
+          <a href="${commit.html_url}" target="_blank" class="view-commit-link">
+            <i class="fas fa-code-branch"></i> View on GitHub
+          </a>
+        </div>
+      `;
+      modalContent.appendChild(commitElement);
+    });
 
-        modal.style.display = 'block';
-        overlay.style.display = 'block';
-      } catch (error) {
-        modalContent.innerHTML = `<p>Error: ${error.message}</p>`;
-      }
-    }
-
+    modal.style.display = 'block';
+    overlay.style.display = 'block';
+  } catch (error) {
+    modalContent.innerHTML = `<p>Error: ${error.message}</p>`;
+  }
+}
     // Close the modal
     function closeModal() {
       modal.style.display = 'none';
