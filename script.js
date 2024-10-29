@@ -183,11 +183,6 @@ async function fetchProjects() {
     closeModalButton.addEventListener('click', closeModal);
     overlay.addEventListener('click', closeModal);
 
-    // Fetch languages for a project
-    async function fetchLanguages(projectName) {
-      const response = await fetch(`https://api.github.com/repos/ShadBalti/${projectName}/languages`);
-      return response.ok ? await response.json() : {};
-    }
 
 
 
