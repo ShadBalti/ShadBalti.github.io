@@ -94,6 +94,8 @@ async function fetchProjects() {
         <div class="project-header">
           <img src="${project.owner.avatar_url}" alt="${project.owner.login}" class="avatar" />
           <h3>${project.name}</h3>
+          <button class="show-commit-button" data-project="${project.name}">Show Commits</button>
+
         </div>
         <p>${project.description || "No description available."}</p>
         <div class="project-details">
