@@ -158,11 +158,21 @@ async function fetchProjects() {
           commitElement.classList.add("commit-item");
 
           commitElement.innerHTML = `
-            <p class="commit-message">${commit.commit.message}</p>
-            <p><strong>Author:</strong> ${commit.commit.author.name}</p>
-            <p><strong>Date:</strong> ${new Date(commit.commit.author.date).toLocaleString()}</p>
-            <p class="commit-link"><a href="${commit.html_url}" target="_blank">View Commit on GitHub</a></p>
-          `;
+  <div class="commit-header">
+    <div class="commit-author-info">
+      <img src="https://avatars.githubusercontent.com/${commit.author?.login || ''}" alt="Author Avatar" class="author-avatar" />
+      <span class="author-name">${commit.commit.author.name}</span>
+      <span class="commit-hash">(${commit.sha.slice(0, 7)})</span>
+    </div>
+    <div class="commit-date">${new Date(commit.commit.author.date).toLocaleString()}</div>
+  </div>
+  <p class="commit-message">${commit.commit.message}</p>
+  <div class="commit-actions">
+    <a href="${commit.html_url}" target="_blank" class="view-commit-link">
+      <i class="fas fa-code-branch"></i> View on GitHub
+    </a>
+  </div>
+`;
 
           modalContent.appendChild(commitElement);
         });
