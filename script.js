@@ -56,14 +56,13 @@ function typeWriter() {
 function initializePortfolio() {
   typeWriter(); // Start typewriter effect
   fetchProjects(); // Fetch GitHub repos
-  loadContributionGraph(); // Load GitHub contribution graph
 }
 
 const projectsContainer = document.getElementById("projects-container");
-  const modal = document.getElementById('modal');
-    const overlay = document.getElementById('overlay');
-    const closeModalButton = document.getElementById('closeModal');
-    const modalContent = document.getElementById('modalContent');
+const modal = document.getElementById('modal');
+const overlay = document.getElementById('overlay');
+const closeModalButton = document.getElementById('closeModal');
+const modalContent = document.getElementById('modalContent');
 
 
 // Function to fetch languages for a specific repository
@@ -83,14 +82,14 @@ async function fetchProjects() {
 
     // Iterate over each project and display its data
     for (const project of projects) {
-     if(project.fork === false && project.description != ""){
-      const languages = await fetchLanguages(project.name);
-      const languagesList = Object.keys(languages).join(", ") || "No languages found";
+      if (project.fork === false && project.description != "") {
+        const languages = await fetchLanguages(project.name);
+        const languagesList = Object.keys(languages).join(", ") || "No languages found";
 
-      const projectElement = document.createElement("div");
-      projectElement.classList.add("project-card");
+        const projectElement = document.createElement("div");
+        projectElement.classList.add("project-card");
 
-      projectElement.innerHTML = `
+        projectElement.innerHTML = `
         <div class="project-header">
           <img src="${project.owner.avatar_url}" alt="${project.owner.login}" class="avatar" />
           <h3>${project.name}</h3>
@@ -132,20 +131,20 @@ async function fetchProjects() {
   </div>
       `;
 
-      projectsContainer.appendChild(projectElement);
-// Add event listener to "Show Commits" button
-            const showCommitButton = projectElement.querySelector(".show-commit-button");
-            showCommitButton.addEventListener("click", () => showCommits(project.name));
-     }
+        projectsContainer.appendChild(projectElement);
+        // Add event listener to "Show Commits" button
+        const showCommitButton = projectElement.querySelector(".show-commit-button");
+        showCommitButton.addEventListener("click", () => showCommits(project.name));
+      }
     }
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error:", error);https://github.com/ShadBalti/ShadBalti.github.io
     projectsContainer.innerHTML = `<p>Unable to load projects. ${error.message}</p>`;
   }
 }
 
 // Fetch and display recent commits
-    async function showCommits(projectName) {
+async function showCommits(projectName) {
   try {
     const response = await fetch(`https://api.github.com/repos/ShadBalti/${projectName}/commits`);
     if (!response.ok) throw new Error("Failed to fetch commits");
@@ -201,26 +200,16 @@ async function fetchProjects() {
     modalContent.innerHTML = `<p>Error: ${error.message}</p>`;
   }
 }
-    // Close the modal
-    function closeModal() {
-      modal.style.display = 'none';
-      overlay.style.display = 'none';
-    }
-
-    closeModalButton.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-
-
-
-
-
-// Load GitHub Contributions Graph
-function loadContributionGraph() {
-  const graphContainer = document.getElementById('contribution-graph');
-  graphContainer.innerHTML = `
-    <img src="https://ghchart.rshah.org/ShadBalti" alt="GitHub Contribution Graph">
-  `;
+// Close the modal
+function closeModal() {
+  modal.style.display = 'none';
+  overlay.style.display = 'none';
 }
+
+closeModalButton.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
+
+
 
 const blogsContainer = document.getElementById("blogs-container");
 
@@ -233,8 +222,6 @@ async function fetchDevToPosts(username) {
     if (!response.ok) throw new Error('Failed to fetch articles');
 
     const posts = await response.json();
-    console.log("API Result:", posts);  // Log the full response for debugging
-
     // Check if posts are available
     if (posts.length === 0) {
       blogsContainer.innerHTML = `<p>No articles found for user: ${username}.</p>`;
